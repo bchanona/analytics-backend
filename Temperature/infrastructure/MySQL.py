@@ -7,12 +7,12 @@ class MySQLTemperatureRepository(TemperatureRepository):
     def __init__(self):
         self.connection = getConnection()
     
-    def get_all(self) -> List[TemperatureData]:
+    def get_all(self,user_id: int) -> List[TemperatureData]:
         if not self.connection:
             return []
         
         cursor = self.connection.cursor(dictionary=True)
-        cursor.execute("SELECT measurement FROM TEMPERATURES")
+        cursor.execute("SELECT measurement FROM TEMPERATURES WHERE user_id = %s",(user_id,))
         rows = cursor.fetchall()
         
         temperature_data_list = [TemperatureData(**row) for row in rows]
