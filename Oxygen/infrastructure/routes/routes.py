@@ -5,14 +5,14 @@ from Oxygen.application.usecase.classify_measurement_useCase import GetClassifyU
 
 oxygen_router = APIRouter()
 
-@oxygen_router.get("/oxygen/statistics")
-def getstatistics():
+@oxygen_router.get("/oxygen/statistics/{user_id}")
+def getstatistics(user_id: int):
     repo =  MySQLOxygenRepository()
     use_case = OxygenSummary(repo)
-    return use_case.execute()
+    return use_case.execute(user_id)
         
-@oxygen_router.get("/oxygen/classify")
-def getclassify():
+@oxygen_router.get("/oxygen/classify/{user_id}")
+def getclassify(user_id: int):
     repo = MySQLOxygenRepository()
     use_case = GetClassifyUseCase(repo)
-    return use_case.execute()
+    return use_case.execute(user_id)

@@ -7,8 +7,11 @@ class OxygenSummary:
     def __init__(self, repo: OxygenRepository):
         self.repo = repo
     
-    def execute(self):
-        data = self.repo.get_all()
+    def execute(self, user_id: int):
+        data = self.repo.get_all(user_id)
+        
+        if not data:
+            return {"mensaje": "No hay mediciones registradas para este usuario."}
         stats = StatisticService(data)
         
         return {

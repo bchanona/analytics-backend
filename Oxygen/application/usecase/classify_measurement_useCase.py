@@ -8,8 +8,12 @@ class GetClassifyUseCase():
     def __init__(self,repo : OxygenRepository):
         self.repo = repo
         
-    def execute(self) -> Dict[str, List]:
-        data = self.repo.get_all()
+    def execute(self,user_id: int) -> Dict[str, List]:
+        data = self.repo.get_all(user_id)
+        
+        if not data:
+            return {"mensaje": "No hay mediciones registradas para este usuario."}
+        
         service = ClassifyMeasurementService(data)
         counts = Counter(service.classifications)
         
