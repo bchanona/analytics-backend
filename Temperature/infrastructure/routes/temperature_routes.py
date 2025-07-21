@@ -6,14 +6,14 @@ from Temperature.application.usecase.classify_measurement_useCase import GetClas
 
 temperature_router = APIRouter()
 
-@temperature_router.get("/temperatures/statistics")
-def get_statistics():
+@temperature_router.get("/temperatures/statistics/{user_id}")
+def get_statistics(user_id: int):
     repo = MySQLTemperatureRepository()
     use_case = TemperatureSummary(repo)
-    return use_case.execute()
+    return use_case.execute(user_id)
 
-@temperature_router.get("/temperatures/classify")
-def get_classify():
+@temperature_router.get("/temperatures/classify/{user_id}")
+def get_classify(user_id: int):
     repo = MySQLTemperatureRepository()
     use_case = GetClassifyUseCase(repo)
-    return use_case.execute()
+    return use_case.execute(user_id)
