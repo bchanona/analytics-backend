@@ -4,5 +4,5 @@ from typing import List
 
 class OxygenRepository(ABC):
     @abstractmethod
-    def get_all(self) -> List[OxygenData]:
+    def get_all(self, user_id: int) -> List[OxygenData]:
         pass    
