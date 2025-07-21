@@ -4,5 +4,5 @@ from abc import ABC, abstractmethod
 
 class HeartRateRepository(ABC):
     @abstractmethod
-    def get_all(self)->List[HeartRateData]:
+    def get_all(self, user_id: int)->List[HeartRateData]:
         pass
